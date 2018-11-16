@@ -24,7 +24,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.exoplayer2.video.VideoListener;
 
-public class PlayerActivity2 extends AppCompatActivity {
+public class PlayerActivity3 extends AppCompatActivity {
 
     SurfaceView videoView;
 
@@ -34,7 +34,7 @@ public class PlayerActivity2 extends AppCompatActivity {
     AspectRatioFrameLayout videoFrame;
 
     private void setViews() {
-        setContentView(R.layout.activity_player);
+        setContentView(R.layout.activity_mini_player);
 
         videoView = findViewById(R.id.videoView);
         videoFrame = findViewById(R.id.videoFrame);
@@ -78,13 +78,13 @@ public class PlayerActivity2 extends AppCompatActivity {
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, userAgent, bandwidthMeter);
         String uri = "https://storage.googleapis.com/wvmedia/cenc/h264/tears/tears.mpd";
 
-        uri = "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd";
+        uri = "http://amssamples.streaming.mediaservices.windows.net/683f7e47-bd83-4427-b0a3-26a6c4547782/BigBuckBunny.ism/manifest(format=mpd-time-csf)";
+        //uri = "https://bitmovin-a.akamaihd.net/content/MI201109210084_1/mpds/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.mpd";
         player.addVideoListener(new VideoListener() {
             @Override
             public void onVideoSizeChanged(int width, int height, int unappliedRotationDegrees, float pixelWidthHeightRatio) {
 
                 float ratio = (float)width / (float)height;
-
                 videoFrame.setAspectRatio(ratio);
             }
         });

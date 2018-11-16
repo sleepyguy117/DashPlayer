@@ -30,6 +30,12 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             >
         </activity>
+
+        <activity android:name=".PlayerActivity3"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            >
+        </activity>
         <service android:name=".BackgroundPlaybackService"/>
     </application>
 </manifest>

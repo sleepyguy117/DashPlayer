@@ -137,7 +137,8 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onVideoSizeChanged(int width, int height, int unappliedRotationDegrees, float pixelWidthHeightRatio) {
 
-                float ratio = width / height;
+                float ratio = (float)width / (float)height;
+
                 videoFrame.setAspectRatio(ratio);
             }
         });

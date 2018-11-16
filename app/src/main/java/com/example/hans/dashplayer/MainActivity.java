@@ -9,8 +9,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Button playButton;
-
     private Button playButton2;
+    private Button playButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +19,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         playButton = findViewById(R.id.playButton);
         playButton2 = findViewById(R.id.playButton2);
-
+        playButton3 = findViewById(R.id.playButton3);
 
         playButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
             startActivity(intent);
         });
 
-
         playButton2.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PlayerActivity2.class);
             startActivity(intent);
         });
+
+        playButton3.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, PlayerActivity3.class);
+            startActivity(intent);
+        });
+
     }
 }
