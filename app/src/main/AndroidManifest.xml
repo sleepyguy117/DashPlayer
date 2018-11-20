@@ -22,17 +22,23 @@
 
         <activity android:name=".PlayerActivity"
             android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:launchMode="singleTask"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             >
         </activity>
         <activity android:name=".PlayerActivity2"
             android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:launchMode="singleTask"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             >
         </activity>
 
         <activity android:name=".PlayerActivity3"
             android:screenOrientation="portrait"
+            android:supportsPictureInPicture="true"
+            android:launchMode="singleTask"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             >
         </activity>

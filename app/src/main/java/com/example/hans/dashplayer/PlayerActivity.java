@@ -1,14 +1,19 @@
 package com.example.hans.dashplayer;
 
+import android.app.PictureInPictureParams;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Rational;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -39,13 +44,18 @@ public class PlayerActivity extends AppCompatActivity {
 
     SimpleExoPlayer player;
 
+    private Button pipButton;
+
     AspectRatioFrameLayout videoFrame;
+
+    private PictureInPictureParams.Builder mPictureInPictureParamsBuilder;
 
     private void setViews() {
         setContentView(R.layout.activity_player);
 
         videoView = findViewById(R.id.videoView);
         videoFrame = findViewById(R.id.videoFrame);
+        pipButton = findViewById(R.id.pipButton);
 
         videoView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -63,6 +73,24 @@ public class PlayerActivity extends AppCompatActivity {
                 player.clearVideoSurface();
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mPictureInPictureParamsBuilder =
+                    new PictureInPictureParams.Builder();
+        }
+
+        pipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    pipButton.setVisibility(View.INVISIBLE);
+                    Rational aspectRatio = new Rational(videoFrame.getWidth(), videoFrame.getHeight());
+                    mPictureInPictureParamsBuilder.setAspectRatio(aspectRatio);
+                    PlayerActivity.this.enterPictureInPictureMode(mPictureInPictureParamsBuilder.build());
+                }
+            }
+        });
     }
 
 
@@ -72,18 +100,24 @@ public class PlayerActivity extends AppCompatActivity {
 
 
         setViews();
+
+        initPlayer();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        initPlayer();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
 
         if(player != null) {
             player.release();
@@ -171,6 +205,7 @@ public class PlayerActivity extends AppCompatActivity {
         });
 
         player.setPlayWhenReady(true);
+        player.setVideoSurfaceView(videoView);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 }

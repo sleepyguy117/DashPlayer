@@ -40,27 +40,25 @@ public class PlayerActivity3 extends AppCompatActivity {
         videoFrame = findViewById(R.id.videoFrame);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setViews();
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
 
         Intent intent = new Intent(this, BackgroundPlaybackService.class);
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         // If the Service is not started, it would get destroyed as soon as the Activity unbinds.
         startService(intent);
+        setViews();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
 
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         if (player != null) {
