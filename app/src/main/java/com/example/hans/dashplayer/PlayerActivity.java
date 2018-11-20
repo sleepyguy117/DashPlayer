@@ -93,26 +93,12 @@ public class PlayerActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
+    protected void onStart() {
+        super.onStart();
         setViews();
 
         initPlayer();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
     }
 
     @Override
@@ -122,14 +108,6 @@ public class PlayerActivity extends AppCompatActivity {
         if(player != null) {
             player.release();
         }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        Log.d(MainActivity.class.toString(), "Configuration changed");
-        setViews();
     }
 
     private void initPlayer() {
